@@ -5,7 +5,7 @@ Matthew is a student at the University of Kansas, purusing a B.S. in Computer En
 ### Projects
 - Laser Harp
 - Window Weather Vent
-- [LED Pace Clock](/Pace_Clock.md)
+- [LED Pace Clock](/pace_clock.md)
 - Python Powered Bot
 - [Low Pass Filter Design](/docs/filter_design_report.pdf)
 - [This website](mefelsen.github.io)
