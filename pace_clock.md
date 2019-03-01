@@ -7,39 +7,8 @@ The LED strip is connected to an Arduino Mega. The Arduino has code on it that a
 ![Schematic](/images/pace_clock_schematic.png)
 This diagram is not completely accurate as the software I used to design this diagram wouldn’t allow me to place external power supplies. Instead of power and ground wires connecting directly to the Arduino. They are connected to a 5V power supply. The serial connection from the Arduino to the data in pin on the strip is the same.
 
-Code is shown below:
+The most difficult part was parsing the serial data and converting it into data the Arduino could use.
 ```c
-#include <FastLED.h>
-
-#define LEDPIN = 7;
-
-String inputString = "";
-bool stringComplete = false;
-String commandString = "";
-
-unsigned int NUM_LEDS = 0;
-unsigned int NUM_TIMES = 0;
-unsigned int DIST = 0;
-double INTERVAL = 0;
-double REST = 0;
-bool start = false;
-unsigned long startMillis;
-unsigned long currentMillis;
-unsigned long period;
-boolean isConnected = false;
-
-int dot = 0;
-int k = 0;
-int i = 0;
-
-CRGB leds[750];
-
-void setup() {
- Serial.begin(9600);
- FastLED.addLeds<WS2812B, 7>(leds,750);
- startMillis = millis();
-}
-
 void loop() {
   if(stringComplete) {
     stringComplete = false;
@@ -102,40 +71,6 @@ void loop() {
     inputString = "";
   }
 
-  if(start) {
-    currentMillis = millis();
-    if(currentMillis - startMillis >= period && dot < NUM_LEDS - 9 /*&& i%2 == 0 && i < DIST && k < NUM_TIMES*/) {
-        leds[dot] = CRGB::Green;
-        leds[dot+1] = CRGB::Green;
-        leds[dot+2] = CRGB::Green;
-        leds[dot+3] = CRGB::Green;
-        leds[dot+4] = CRGB::Green;
-        leds[dot+5] = CRGB::Green;
-        leds[dot+6] = CRGB::Green;
-        leds[dot+7] = CRGB::Green;
-        leds[dot+8] = CRGB::Green;
-        leds[dot+9] = CRGB::Green;
-        FastLED.show();
-        leds[dot] = CRGB::Black;
-        leds[dot+1] = CRGB::Black;
-        leds[dot+2] = CRGB::Black;
-        leds[dot+3] = CRGB::Black;
-        leds[dot+4] = CRGB::Black;
-        leds[dot+5] = CRGB::Black;
-        leds[dot+6] = CRGB::Black;
-        leds[dot+7] = CRGB::Black;
-        leds[dot+8] = CRGB::Black;
-        leds[dot+9] = CRGB::Black;
-        dot++;
-        startMillis = currentMillis;
-    }
-    if(dot == NUM_LEDS - 9) {
-      dot = 0;
-      start = false;
-    }
-  }
-
-}
 void getCommand() {
   if(inputString.length()>0) {
      commandString = inputString.substring(1,12);
@@ -156,3 +91,164 @@ void serialEvent() {
   }
 }
 ```
+Below is the GUI that I made using Windows Forms. This is written in C#.
+![GUI](/images/pace_clock_gui.png)
+The code below is how I take the inputted by the user via API and convert them to serial data for the Arduino to use.
+
+'''c#
+void getAvailableComPorts()
+        {
+            ports = SerialPort.GetPortNames();
+        }
+void sendtoArduino()
+        {
+            //
+            //Length
+            //
+            if (comboBox2.SelectedIndex == 0)
+            {
+                port.Write("#LEN00000000\n");
+            }
+            else
+            {
+                port.Write("#LEN10000000\n");
+            }
+            //
+            //Number of times
+            //
+            string val = numericUpDown1.Value.ToString();
+            if (numericUpDown1.Value > 9)
+            {
+                port.Write("#2TIM" + val + "00000\n");
+                Debug.WriteLine("# of times: " + val);
+            }
+            else
+            {
+                port.Write("#1TIM" + val + "000000\n");
+                Debug.WriteLine("# of times: " + val);
+            }
+            //
+            //Pace
+            //
+            string total_seconds = convert(maskedTextBox1.Text);
+            total_seconds = format(total_seconds);
+            port.Write("#PACE" + total_seconds + "\n");
+            Debug.WriteLine("Pace: " + total_seconds);
+            //
+            //Interval
+            //
+            string interval = convert(maskedTextBox2.Text);
+            interval = format(interval);
+            port.Write("#REST" + interval + "\n");
+            Debug.WriteLine("Interval: " + interval);
+            //
+            //Distance
+            //
+            string s_dist = comboBox3.SelectedItem.ToString();
+            int dist = Int32.Parse(s_dist) / 25;
+            s_dist = dist.ToString();
+            if (dist > 9)
+            {
+                port.Write("#2DIS" + s_dist + "00000\n");
+                Debug.WriteLine("Distance: " + s_dist);
+            }
+            else
+            {
+                port.Write("#1DIS" + s_dist + "000000\n");
+                Debug.WriteLine("Distance: " + s_dist);
+            }
+        }
+
+        private void connectToArduino()
+        {
+            isConnected = true;
+            string selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
+            try
+            {
+                port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
+            }
+            catch (ManagementException e)
+            {
+                //Do Nothing
+            }
+            port.Open();
+            port.Write("#STAR0000000\n");
+            button1.Text = "Disconnect";
+        }
+
+        private void disconnectFromArduino()
+        {
+            isConnected = false;
+            port.Write("#STOP0000000\n");
+            port.Close();
+            button1.Text = "Connect";
+        }
+
+        private string AutodetectArduinoPort()
+        {
+            //Set Arduino port as default
+            ManagementScope connectionScope = new ManagementScope();
+            SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_SerialPort");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
+
+            try
+            {
+                foreach (ManagementObject item in searcher.Get())
+                {
+                    string desc = item["Description"].ToString();
+                    string deviceId = item["DeviceID"].ToString();
+
+                    if (desc.Contains("Arduino"))
+                    {
+                        return deviceId;
+                    }
+                }
+            }
+            catch (ManagementException e)
+            {
+                //Do Nothing
+            }
+
+            return null;
+        }
+
+        string convert(string s)
+        {
+            /*convert string from masked textbox to number for second conversion
+            and then back to string to send to arduino*/
+            int minutes;
+            int seconds;
+            double milliseconds;
+            double total_seconds;
+            string s_total_seconds;
+            try
+            {
+                minutes = Int32.Parse(s.Substring(0, 2));
+                seconds = Int32.Parse(s.Substring(3, 2));
+                milliseconds = Double.Parse(s.Substring(6, 2));
+                total_seconds = (minutes * 60) + seconds + (milliseconds * .01);
+                s_total_seconds = total_seconds.ToString();
+                if (milliseconds == 0)
+                {
+                    s_total_seconds += ".00";
+                }
+                return s_total_seconds;
+            }
+            catch (FormatException)
+            {
+                //Do Nothing
+            }
+            return "";
+        }
+
+        string format(string s)
+        {
+            //Make sure all strings are the same # of characters
+            for (int i = s.Length; i < 7; i++)
+            {
+                s += "0";
+            }
+            return s;
+        }
+'''
+[Here](https://www.youtube.com/watch?v=GyDT5p9yfjY) is a video of the LED Pace Clock in action.
