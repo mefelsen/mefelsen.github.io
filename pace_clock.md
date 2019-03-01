@@ -95,7 +95,7 @@ Below is the GUI that I made using Windows Forms. This is written in C#.
 ![GUI](/images/pace_clock_gui.png)
 The code below is how I take the inputted by the user via API and convert them to serial data for the Arduino to use.
 
-'''c#
+'''c
 void getAvailableComPorts()
         {
             ports = SerialPort.GetPortNames();
