@@ -1,6 +1,6 @@
 ## Welcome to Matthew Felsen's website!
 
-Matthew is a student at the University of Kansas, purusing a B.S. in Computer Engineering with an emphasis on embedded systems.
+Matthew is a student at the University of Kansas, pursuing a B.S. in Computer Engineering with an emphasis in embedded systems.
 
 ### Projects
 - Laser Harp
