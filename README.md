@@ -1,4 +1,4 @@
-## Welcome to Matthew Felsen's website!
+## Welcome to Matthew Felsen's Website!
 
 Matthew is a student at the University of Kansas, pursuing a B.S. in Computer Engineering with an emphasis in embedded systems.
 
