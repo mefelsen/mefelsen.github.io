@@ -7,8 +7,8 @@ Matthew is a student at the University of Kansas, purusing a B.S. in Computer En
 - Window Weather Vent
 - [LED Pace Clock](/Pace_Clock.md)
 - Python Powered Bot
-- [Low Pass Filter Design](/filter_design_report.pdf)
+- [Low Pass Filter Design](/docs/filter_design_report.pdf)
 - [This website](mefelsen.github.io)
 
 
-### [Resume](/Resume_v2.pdf)
+### [Resume](/docs/Resume_v2.pdf)
