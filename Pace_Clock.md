@@ -10,7 +10,7 @@ This diagram is not completely accurate as the software I used to design this di
 Code is shown below:
 `#include <FastLED.h>
 
-#define LEDPIN = 7;
+<div>#define LEDPIN = 7;<\div>
 
 String inputString = "";
 bool stringComplete = false;
