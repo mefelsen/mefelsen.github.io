@@ -8,9 +8,10 @@ The LED strip is connected to an Arduino Mega. The Arduino has code on it that a
 This diagram is not completely accurate as the software I used to design this diagram wouldn’t allow me to place external power supplies. Instead of power and ground wires connecting directly to the Arduino. They are connected to a 5V power supply. The serial connection from the Arduino to the data in pin on the strip is the same.
 
 Code is shown below:
-`#include <FastLED.h>
+```c
+#include <FastLED.h>
 
-<div>#define LEDPIN = 7;<\div>
+#define LEDPIN = 7;
 
 String inputString = "";
 bool stringComplete = false;
@@ -153,4 +154,5 @@ void serialEvent() {
       stringComplete = true;
     }
   }
-}`
+}
+```
