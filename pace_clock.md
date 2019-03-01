@@ -92,6 +92,6 @@ void serialEvent() {
 }
 ```
 Below is the GUI that I made using Windows Forms. This is written in C#.
-![GUI](/images/pace_clock_gui.png)
+![GUI](/images/pace_clock_gui.PNG)
 
 [Here](https://www.youtube.com/watch?v=GyDT5p9yfjY) is a video of the LED Pace Clock in action.
