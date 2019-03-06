@@ -1,7 +1,11 @@
 ﻿## LED Pace Clock
-As a personal project, I wanted to combine my passions; sports and technology. This was a great way to put the two together.
+This project was originally a personal project, but after some complications I decided to pause the project. I then suggested it as an idea for PickHacks, a hackathon as Missouri S&t where me and some teammates ultimately built it into a working prototype. 
+
+I wanted to combine my passions; sports and technology. This was a great way to put the two together.
 
 A little background on the project, I swam competitively for several years and I enjoyed having immediate feedback during training. So I came up with this idea of a LED strip pace clock. The strip is placed at the bottom of the pool and you have to race the light. The point of this is to keep pace and it provides immediate and visual feedback. This really helps when you tweak your stroke technique. This LED strip can also be used for track as well since both sports consist of an athlete covering a certain amount of distance over time just in a different medium(water/air).
+
+
 
 The LED strip is connected to an Arduino Mega. The Arduino has code on it that allows it to interface with a GUI that I made using Visual Studio. Below is a wiring diagram of how the LED strip is connected to the Arduino.
 ![Schematic](/images/pace_clock_schematic.png)
