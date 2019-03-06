@@ -6,7 +6,7 @@ This build required:
 - Arduino Uno
 - 6x Laser Diodes
 - 6x Photoresistors
-- 6x 100 Ohm Resistors
+- 12x 100 Ohm Resistors
 - MIDI Emulator (such as garage band)
 
 The diodes, photoresistors, and resistors were wired in parallel to the Arduino as shown below:
