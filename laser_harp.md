@@ -12,18 +12,16 @@ This build required:
 The diodes, photoresistors, and resistors were wired in parallel to the Arduino as shown below:
 ![Schematic](/images/laser_harp_schematic.jpg)
 
-The code for this is always monitoring the current going through each photoresistor by using analogRead(), when the laser is blocked and no light is entering the photoresistor, no current is read and the Arduino knows to play a note in which it calls midiMessage() and writes the data to the serial port.
+The code for this is always monitoring the current going through each photoresistor by using analogRead(), when the laser is blocked and no light is entering the photoresistor, no current is read and the Arduino knows to play a note in which it calls midiMessage() and writes the data to the serial port. This serial data can be interpreted by a MIDI emulator.
 
-''' c
+```c
 void loop() { 
-  for(int i=0;i<notes;i++){   
-    
-    if((analogRead(i)<threshold)&&(notePlaying[i]==false)){        //note on & CC messages
+      for(int i=0;i<notes;i++){   
+      if((analogRead(i)<threshold)&&(notePlaying[i]==false)){        //note on & CC messages
       int note=beginNote+scale[i];
       midiMessage(0x90, 1, note, 100);                          
       notePlaying[i]=true;                                               
-    }
-    
+    }   
     if((analogRead(i)>threshold)&&(notePlaying[i]==true)){        //note off messages
       int note=beginNote+scale[i];
       midiMessage(0x80, 1, note, 0x00);
@@ -49,8 +47,9 @@ void midiMessage(int commandByte, int channelByte, int data1Byte, int data2Byte)
     Serial.println(data2Byte);
   }
 }
-'''
+```
 
 The final product is shown below:
 ![Harp](/images/laser_harp.jpg)
+
 (This was the only picture I took of it, unfortunately it was in my messy garage, I was using fog so the light would refract off the particles and make the laser beam visible)
