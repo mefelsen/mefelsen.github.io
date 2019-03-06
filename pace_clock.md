@@ -1,5 +1,5 @@
 ﻿## LED Pace Clock
-This project was originally a personal project, but after some complications I decided to pause the project. I then suggested it as an idea for PickHacks, a hackathon as Missouri S&t where me and some teammates ultimately built it into a working prototype. 
+This project was originally a personal project, but after some complications I decided to pause the project. I then suggested it as an idea for PickHacks, a hackathon as Missouri S&T where me and some teammates ultimately built it into a working prototype. 
 
 I wanted to combine my passions; sports and technology. This was a great way to put the two together.
 
