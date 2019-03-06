@@ -7,76 +7,8 @@ The LED strip is connected to an Arduino Mega. The Arduino has code on it that a
 ![Schematic](/images/pace_clock_schematic.png)
 This diagram is not completely accurate as the software I used to design this diagram wouldn’t allow me to place external power supplies. Instead of power and ground wires connecting directly to the Arduino. They are connected to a 5V power supply. The serial connection from the Arduino to the data in pin on the strip is the same.
 
-The most difficult part was parsing the serial data and converting it into data the Arduino could use.
+The most difficult part was parsing the serial data and converting it into data the Arduino could use. The function below takes in the data from the serial port and stores it at as string. That string is then parsed and converted to integer values that the Arduino uses to calculate the speed of the strip, # of repititions, color, etc.
 ```c
-void loop() {
-  if(stringComplete) {
-    stringComplete = false;
-    getCommand();
-
-  if(commandString.startsWith("STAR")) {
-    Serial.print("Signal Started");
-  }
-  if(commandString.startsWith("STOP")) {
-    Serial.print("Signal Stopped");
-  }
-  if(commandString.startsWith("LEN0")) {
-      //# of leds for 25 yard course
-      //NUM_LEDS = 686;
-      NUM_LEDS = 150;
-  }
-  if(commandString.startsWith("LEN1")) {
-      //# of leds for 25 meter course
-      NUM_LEDS = 750;
-  }
-  if(commandString.startsWith("1TIM")) {
-      //determines number of times LED runs down strip
-      NUM_TIMES = (int)commandString[4];
-  }
-  if(commandString.startsWith("2TIM")) {
-      NUM_TIMES = commandString.substring(4,6).toInt();
-  }
-  if(commandString.startsWith("PACE")) {
-    //Parse data xxxx.xx
-    //Removes trailing 0's
-    String temp0 = commandString.substring(4,12);
-    for(int i = 0; i < 12; i++) {
-      if(temp0[i] == '.') {
-        temp0 = commandString.substring(4,i+2);
-      }
-    }
-    INTERVAL = temp0.toDouble();
-  }
-  if(commandString.startsWith("REST")) {
-    //Remove trailing 0's
-    String temp = commandString.substring(4,12);
-    for(int i = 0; i < 12; i++) {
-      if(temp[i] == '.') {
-        temp = commandString.substring(4,i+2);
-      }
-    }
-    //Take total interval and subtract pace to get amount of rest before starting LED movement
-    REST = temp.toDouble() - INTERVAL;
-  }
-  if(commandString.startsWith("1DIS")) {
-    DIST = (int)commandString[4];
-  }
-  if(commandString.startsWith("2DIS")) {
-    DIST = commandString.substring(4,6).toInt();
-  }
-  if(commandString.startsWith("GO")) {
-    start = true;
-    period = (INTERVAL*1000)/(NUM_LEDS*DIST);
-  }
-    inputString = "";
-  }
-
-void getCommand() {
-  if(inputString.length()>0) {
-     commandString = inputString.substring(1,12);
-  }
-}
-
 void serialEvent() {
   while (Serial.available()) {
     // get the new byte:
@@ -89,7 +21,6 @@ void serialEvent() {
       stringComplete = true;
     }
   }
-}
 ```
 Below is the GUI that I made using Windows Forms. This is written in C#.
 ![GUI](/images/pace_clock_gui.PNG)
