@@ -5,8 +5,6 @@ I wanted to combine my passions; sports and technology. This was a great way to 
 
 A little background on the project, I swam competitively for several years and I enjoyed having immediate feedback during training. So I came up with this idea of a LED strip pace clock. The strip is placed at the bottom of the pool and you have to race the light. The point of this is to keep pace and it provides immediate and visual feedback. This really helps when you tweak your stroke technique. This LED strip can also be used for track as well since both sports consist of an athlete covering a certain amount of distance over time just in a different medium(water/air).
 
-
-
 The LED strip is connected to an Arduino Mega. The Arduino has code on it that allows it to interface with a GUI that I made using Visual Studio. Below is a wiring diagram of how the LED strip is connected to the Arduino.
 ![Schematic](/images/pace_clock_schematic.png)
 This diagram is not completely accurate as the software I used to design this diagram wouldn’t allow me to place external power supplies. Instead of power and ground wires connecting directly to the Arduino. They are connected to a 5V power supply. The serial connection from the Arduino to the data in pin on the strip is the same.
@@ -26,6 +24,8 @@ void serialEvent() {
     }
   }
 ```
+Originally, multiple serial messages were sent to the Arduino in order to configure all the settings, but the Ardunio's clock speed was not fast enough to catch the serial messages even when soft interrupts were added. So, a design decision was made to send a single serial message and use bit unpacking.
+
 Below is the GUI that I made using Windows Forms. This is written in C#.
 ![GUI](/images/pace_clock_gui.PNG)
 
