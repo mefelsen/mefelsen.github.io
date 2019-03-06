@@ -3,7 +3,7 @@
 Matthew is a student at the University of Kansas, pursuing a B.S. in Computer Engineering with an emphasis in embedded systems.
 
 ### Projects
-- Laser Harp
+- [Laser Harp](/laser_harp.md)
 - Window Weather Vent
 - [LED Pace Clock](/pace_clock.md)
 - Python Powered Bot
