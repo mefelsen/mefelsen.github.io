@@ -11,7 +11,12 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-
+.page-header1 {
+    color: #0051ba;
+    text-align: center;
+    background-color: #e8000d;
+    background-image: linear-gradient(120deg, #0051ba, #e8000d);
+}
 $header-bg-color: #0051ba !default;
 $header-bg-color-secondary: #e8000d !default;
 $section-headings-color: #0051ba !default;
