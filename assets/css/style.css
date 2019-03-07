@@ -2,6 +2,7 @@
 ---
 
 @import 'jekyll-theme-cayman';
+@import '/_sass/my_theme.scss';
 
 .icon-bar {
   position: fixed;
