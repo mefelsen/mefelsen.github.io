@@ -1,7 +1,4 @@
- ---
- ---
-
-@import "{{ site.theme }}";
+@import "../../_sass/my_theme.scss";
 
 .icon-bar {
   position: fixed;

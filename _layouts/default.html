@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="../_sass/my_theme.scss" media="screen">
 <html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-
+<head>
+    <link rel="stylesheet" type="text/css" href="../_sass/my_theme.scss">
     {% if site.google_analytics %}
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-      <script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', '{{ site.google_analytics }}');
-      </script>
+    </script>
     {% endif %}
     <meta charset="UTF-8">
 
-{% seo %}
+    {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-  </head>
+</head>
   <body>
-
     <header class="page-header" role="banner">
       <!--<h1 class="project-name">{{ "Matthew Felsen" | default: site.title | default: site.github.repository_name }}</h1>-->
       <h1 class="project-name">Matthew Felsen</h1>
