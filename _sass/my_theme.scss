@@ -1,6 +1,6 @@
-@import "normalize";
-@import "rouge-github";
-@import "variables";
+@import "normalize.scss";
+@import "rouge-github.scss";
+@import "variables.scss";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
 @mixin large {
