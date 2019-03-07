@@ -2,6 +2,7 @@
  ---
 
 @import "{{ site.theme }}";
+@import "../my_theme.scss";
 
 .icon-bar {
   position: fixed;
