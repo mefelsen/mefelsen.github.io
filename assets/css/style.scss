@@ -2,7 +2,6 @@
  ---
 
 @import "{{ site.theme }}";
-@import "../my_theme.scss";
 
 .icon-bar {
   position: fixed;
@@ -11,3 +10,6 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+$header-bg-color: #0051ba !default;
+$header-bg-color-secondary: #e8000d !default;
