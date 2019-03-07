@@ -1,8 +1,6 @@
 ﻿<!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="../_sass/my_theme.scss" media="screen">
 <html lang="{{ site.lang | default: "en-US" }}">
 <head>
-    <link rel="stylesheet" type="text/css" href="../_sass/my_theme.scss">
     {% if site.google_analytics %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
@@ -20,25 +18,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 </head>
-  <body>
+<body>
+    <link rel="stylesheet" type="text/css" href="../_sass/my_theme.scss" media="screen">
     <header class="page-header" role="banner">
-      <!--<h1 class="project-name">{{ "Matthew Felsen" | default: site.title | default: site.github.repository_name }}</h1>-->
-      <h1 class="project-name">Matthew Felsen</h1>
-      <h2 class="project-tagline">Tinkerer, Student, Sports Enthusiast</h2>
-      <div class="icon-bar">
-        <a href="https://www.github.com/mefelsen">
-          <img src="../images/github_logo.png" alt="GitHub"></a>
-        <a href="https://www.linkedin.com/in/matthew-felsen">
-          <img src="../images/linkedin_logo.png" alt="LinkedIn"></a>
-      </div>
-      {% if site.github.is_project_page %}
+        <!--<h1 class="project-name">{{ "Matthew Felsen" | default: site.title | default: site.github.repository_name }}</h1>-->
+        <h1 class="project-name">Matthew Felsen</h1>
+        <h2 class="project-tagline">Tinkerer, Student, Sports Enthusiast</h2>
+        <div class="icon-bar">
+            <a href="https://www.github.com/mefelsen">
+                <img src="../images/github_logo.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/matthew-felsen">
+                <img src="../images/linkedin_logo.png" alt="LinkedIn">
+            </a>
+        </div>
+        {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-      {% endif %}
-      
+        {% endif %}
+
     </header>
 
     <main id="content" class="main-content" role="main">
-      {{ content }}
+        {{ content }}
     </main>
-  </body>
+</body>
 </html>
