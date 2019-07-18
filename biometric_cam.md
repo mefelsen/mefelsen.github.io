@@ -12,7 +12,7 @@ To build this, the following materials were used
 The algorithm to control the servos constantly monitored the subjects position in the frame. If the subject's displacement from the center was greater than 30% the servo motor would adjust by 5 degrees
 
 The code was as follows
-'''python
+```python
 import sensor, image, time, pyb
 
 sensor.reset()                      # Reset and initialize the sensor.
@@ -97,5 +97,5 @@ while (True):
                 tilt_angle = tilt_angle - 5
                 s_tilt.angle(tilt_angle)
                 #print(tilt_angle)
-'''
+```
 This project can been seen in action [here.](https://www.youtube.com/watch?v=n2Ev9zE0rto)
