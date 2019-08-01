@@ -1,4 +1,8 @@
-@import "../../_sass/my_theme.css";
+---
+---
+
+@import 'jekyll-theme-cayman';
+@import '/_sass/my_theme.scss';
 
 .icon-bar {
   position: fixed;
@@ -6,6 +10,12 @@
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.page-header1 {
+    color: #0051ba;
+    text-align: center;
+    background-color: #e8000d;
+    background-image: linear-gradient(120deg, #0051ba, #e8000d);
 }
 
 $header-bg-color: #0051ba !default;

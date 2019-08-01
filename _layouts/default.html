@@ -12,13 +12,14 @@
     {% endif %}
     <meta charset="UTF-8">
 
-    
+    {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 </head>
 <body>
-    <link rel="stylesheet" type="text/css" href="https://github.com/mefelsen/mefelsen.github.io/blob/master/_sass/my_theme.scss">
+    <!--<link rel="stylesheet" type="text/css" href="/_sass/my_theme.scss">-->
     <header class="page-header" role="banner">
         <!--<h1 class="project-name">{{ "Matthew Felsen" | default: site.title | default: site.github.repository_name }}</h1>-->
         <h1 class="project-name">Matthew Felsen</h1>
