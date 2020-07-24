@@ -12,4 +12,4 @@ Matthew is a student at the University of Kansas, pursuing a B.S. in Computer En
 - This Website
 
 
-### [Resume](/docs/Resume_v4.pdf)
+### [Resume](/docs/Resume_v6.pdf)
